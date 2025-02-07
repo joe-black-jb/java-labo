@@ -1,0 +1,8 @@
+spring:
+  security:
+    oauth2:
+      client:
+        registration:
+          github:
+            clientId: ${OAUTH_GIT_HUB_APP_CLIENT_ID}
+            clientSecret: ${OAUTH_GIT_HUB_APP_CLIENT_SECRET}

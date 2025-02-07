@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<!--a. Thymeleafの有効化-->
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <title>速習 Spring Boot</title>
+  </head>
+  <body>
+    <!--b. ビュー変数を反映-->
+    <p th:text="${message}"></p>
+    <p>[[${message}]]</p>
+  </body>
+</html>

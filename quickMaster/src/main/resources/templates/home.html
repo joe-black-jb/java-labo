@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <title>速習 Spring Boot</title>
+  </head>
+  <body>
+    <!-- 未認証ユーザー用の表示 -->
+    <div class="container" th:if="${user == null}">
+      With GitHub: <a href="/oauth2/authorization/github">click here</a>
+    </div>
+
+    <!-- 認証済みユーザー用の表示 -->
+    <div class="container" th:if="${user != null}">
+      Logged in as: <span th:text="${user.name}"></span>
+      <br />
+      <a href="/logout">Logout</a>
+    </div>
+  </body>
+</html>
