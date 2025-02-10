@@ -1,0 +1,22 @@
+<project>
+  <modelVersion>4.0.0</modelVersion>
+  <!-- Group ID: Usually represents the organization or project name -->
+  <groupId>com.example</groupId>
+
+  <!-- Artifact ID: The name of the project -->
+  <artifactId>java-demo</artifactId>
+
+  <!-- Version of the application -->
+  <version>1.0-SNAPSHOT</version>
+
+  <!-- Packaging type (jar, war, etc.) -->
+  <packaging>jar</packaging>
+
+  <dependencies>
+    <dependency>
+      <groupId>org.apache.commons</groupId>
+      <artifactId>commons-lang3</artifactId>
+      <version>3.16.0</version>
+    </dependency>
+  </dependencies>
+</project>

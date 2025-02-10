@@ -1,0 +1,7 @@
+target/
+*.jar
+.vscode/
+.env
+mvnw
+mvnw.cmd
+memo.sh
