@@ -1,4 +1,5 @@
-package to.msn.wings.quickmaster;
+package quickmaster;
+
 
 import java.util.Arrays;
 

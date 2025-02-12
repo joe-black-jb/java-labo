@@ -1,4 +1,4 @@
-package to.msn.wings.quickmaster.logging;
+package quickmaster.logging;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

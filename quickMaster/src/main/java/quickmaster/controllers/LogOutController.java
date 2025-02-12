@@ -1,4 +1,4 @@
-package to.msn.wings.quickmaster.controllers;
+package quickmaster.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -6,7 +6,7 @@ import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import to.msn.wings.quickmaster.logging.ApplicationLogger;
+import quickmaster.logging.ApplicationLogger;
 
 @Controller
 public class LogOutController {

@@ -1,13 +1,13 @@
 // エラー
 // package quickMaster.src.main.java.to.msn.wings.qucickmaster.controllers;
-package to.msn.wings.quickmaster.controllers;
+package quickmaster.controllers;
 
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
-// Logger の DI 用
-import to.msn.wings.quickmaster.logging.ApplicationLogger;
+import quickmaster.logging.ApplicationLogger;
+
 import org.springframework.beans.factory.annotation.Autowired;
 
 @Controller

@@ -1,5 +1,5 @@
 // qucickmaster を quickmasters とかにすると /hello にアクセスしてもエラーになる
-package to.msn.wings.quickmaster.controllers;
+package quickmaster.controllers;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;

@@ -1,5 +1,5 @@
 // package quickMaster.src.main.java.to.msn.wings.qucickmaster.controllers;
-package to.msn.wings.quickmaster.controllers;
+package quickmaster.controllers;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
