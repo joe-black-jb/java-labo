@@ -20,7 +20,7 @@ public class IndexController {
       this.applicationLogger = applicationLogger;
   }
 
-  @GetMapping("/")
+  @GetMapping("/sample")
   public String root() {
     applicationLogger.logInfo("Hello ⭐️");
     return "home";

@@ -36,15 +36,20 @@ public class UserController {
     // }
 
     // Thymeleaf 用
-    @GetMapping("/user")
+    @GetMapping("/")
     public String user(@AuthenticationPrincipal OAuth2User principal, Model model) {
       // ユーザー情報をログに出力
       applicationLogger.logInfo("principal ⭐️: " + principal);
 
-      if (principal != null) {
+      if (principal == null) {
+        return "home";
+      } else {
+        applicationLogger.logInfo("Username ⭐️: " + principal.getName());
+        applicationLogger.logInfo("attrs ⭐️: " + principal.getAttributes());
+
         // model.addAttribute("name", principal.getAttribute("name"));
         model.addAttribute("user", principal.getAttributes());
       }
-      return "home";  // Thymeleaf の `user.html` テンプレートを返す
+      return "home";  // Thymeleaf の `home.html` テンプレートを返す
     }
 }

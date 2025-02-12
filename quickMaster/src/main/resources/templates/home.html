@@ -12,9 +12,18 @@
 
     <!-- 認証済みユーザー用の表示 -->
     <div class="container" th:if="${user != null}">
-      Logged in as: <span th:text="${user.name}"></span>
+      Logged in as: <span th:text="${user.login}"></span>
       <br />
-      <a href="/logout">Logout</a>
+      <!-- <a href="/logout">Logout</a> -->
+      <!-- ログアウトフォーム -->
+      <form th:action="@{/logout}" method="post">
+        <input
+          type="hidden"
+          th:name="${_csrf.parameterName}"
+          th:value="${_csrf.token}"
+        />
+        <button type="submit">Logout</button>
+      </form>
     </div>
   </body>
 </html>
