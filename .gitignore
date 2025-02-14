@@ -2,6 +2,7 @@ target/
 *.jar
 .vscode/
 .env
+*.db
 mvnw
 mvnw.cmd
 memo.sh

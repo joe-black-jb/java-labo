@@ -1,0 +1,48 @@
+# DB と Spring Boot アプリ両方を Docker で起動する
+# アプリの方がホットリロードが使えないので DB だけコンテナで立ち上げた方が良さそう
+version: "3.8"
+services:
+  dynamodb-local:
+    command: "-jar DynamoDBLocal.jar -sharedDb -dbPath ./data"
+    image: "amazon/dynamodb-local:latest"
+    container_name: dynamodb-local
+    ports:
+      - "8000:8000"
+    volumes:
+      - "./docker/dynamodb:/home/dynamodblocal/data"
+    working_dir: /home/dynamodblocal
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: spring-boot-dynamodb-image
+    container_name: spring-boot-dynamodb-container
+    ports:
+      - "8080:8080"
+    ## コンテナ起動時、ホストマシンの ./target をコンテナ内の /app にマウント
+    ## Dockerfile の COPY でイメージのビルド時に target/*.jar をコンテナ内の /app/app.jar にコピーしている
+    ## ↑ の COPY が volumes によって上書きされる
+    ## => コンテナ内の /app/app.jar は上書きされ無くなってしまう
+    ## => volumes を消すか、残しつつ、Dockerfile の COPY を削除し、yml 側で spring-boot-dynamodb-0.0.1-SNAPSHOT.jar を指定すればOK
+    volumes:
+      - ./src:/app/src # ホットリロード機能を使うため、ホスト側の src ディレクトリをコンテナ側の /app にマウント
+      # - ./target:/app # コンパイル後のファイルをマウント
+      - ./target:/app/target
+    depends_on:
+      - dynamodb-local
+    # command: ["java", "-jar", "/app/app.jar"]
+    command:
+      ["java", "-jar", "/app/target/spring-boot-dynamodb-0.0.1-SNAPSHOT.jar"]
+    # command: ["java", "-jar", "/app/spring-boot-dynamodb-0.0.1-SNAPSHOT.jar"]
+    # command:
+    #   [
+    #     "sh",
+    #     "-c",
+    #     "mvn clean install && java -jar /app/target/spring-boot-dynamodb-0.0.1-SNAPSHOT.jar",
+    #   ]
+    # command: ["java", "-jar", "/app.jar"]
+    environment:
+      # ホットリロードを有効にするための環境変数
+      - SPRING_DEVTOOLS_RESTART_ENABLED=true
+      - SPRING_DEVTOOLS_RESTART_EXCLUDE=static/**,public/**,templates/**
+      - SPRING_DEVTOOLS_RESTART_LOGLEVEL=INFO
