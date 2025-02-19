@@ -22,7 +22,19 @@ docker run --rm <image> ls -R /app
 aws dynamodb describe-limits --endpoint-url http://localhost:8000 --region us-west-2
 ## アプリも Docker で立ち上げていて、アプリコンテナから通信する場合
 dynamodb describe-limits --endpoint-url http://dynamodb-local:8000 --region us-west-2
+
+# 権限変更
+chmod +x ./init-dynamodb.sh
+
+# DynamoDB テーブル一覧確認
+aws --endpoint-url=http://localhost:4566 --region us-east-1 dynamodb list-tables
+
 ```
+
+## DynamoDB との接続に必要な設定
+
+- dynamoDB 設定を Bean として登録
+  - public class DynamoDBConfig
 
 ## 依存関係
 

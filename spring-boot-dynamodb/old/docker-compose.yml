@@ -1,0 +1,16 @@
+version: "3.8"
+services:
+  dynamodb-local:
+    command: "-jar DynamoDBLocal.jar -sharedDb -dbPath ./data"
+    image: "amazon/dynamodb-local:latest"
+    container_name: dynamodb-local
+    ports:
+      - "8000:8000"
+    # volumes: コンテナの作成時に実行
+    volumes:
+      - "./docker/dynamodb:/home/dynamodblocal/data"
+      # スクリプトファイルをマウント
+      - "./init-dynamodb.sh:/docker-entrypoint-initdb.d/init-dynamodb.sh"
+    working_dir: /home/dynamodblocal
+    # entrypoint: コンテナ起動時に実行
+    # entrypoint: ["/bin/sh", "/docker-entrypoint-initdb.d/init-dynamodb.sh"]

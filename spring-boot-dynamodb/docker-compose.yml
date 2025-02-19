@@ -1,11 +1,23 @@
 version: "3.8"
+
 services:
-  dynamodb-local:
-    command: "-jar DynamoDBLocal.jar -sharedDb -dbPath ./data"
-    image: "amazon/dynamodb-local:latest"
-    container_name: dynamodb-local
+  localstack:
+    container_name: "localstack-spring-boot"
+    image: localstack/localstack:latest
     ports:
-      - "8000:8000"
+      - "4566:4566" # LocalStack Gateway
+      - "4510-4559:4510-4559" # external services port range
+    environment:
+      - DOCKER_HOST=unix:///var/run/docker.sock
+      - SERVICES=dynamodb # DynamoDB サービスのみを有効化
+      - DEFAULT_REGION=us-east-1 # デフォルトリージョンの設定
     volumes:
-      - "./docker/dynamodb:/home/dynamodblocal/data"
-    working_dir: /home/dynamodblocal
+      - "/var/run/docker.sock:/var/run/docker.sock"
+      - "localstack-data:/var/lib/localstack" # データ永続化
+      # - ./init-dynamodb.sh:/etc/localstack/init-dynamodb.sh # スクリプトをコンテナにマウント
+      - ./init-dynamodb.sh:/etc/localstack/init/ready.d/init-dynamodb.sh # スクリプトをコンテナにマウント
+    # entrypoint: ["/bin/bash", "/etc/localstack/init-dynamodb.sh"] # コンテナ起動時にスクリプトを実行
+
+volumes:
+  localstack-data:
+    driver: local

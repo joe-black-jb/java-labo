@@ -1,4 +1,7 @@
-package dynamodb;
+// 以下 URL にあるコードを参考に作成
+// https://github.com/michaellavelle/spring-data-dynamodb?tab=readme-ov-file#quick-start
+
+package dynamodb.simple;
 
 import java.util.Arrays;
 import java.util.Objects;
